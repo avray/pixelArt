@@ -1,0 +1,29 @@
+h1 {
+    color: aqua;
+    text-align: center;
+}
+
+body {
+    background-color: black;
+}
+
+#colorpicker {
+    background-color: black;
+    color: red;
+    height: 20px;
+    width: 200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 0.4rem;
+}
+
+#canvas {
+    background-color: lightgray;
+    /* color: white; */
+    height: 200px;
+    width: 200px;
+    margin: auto;
+    display: grid;
+    grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+}
