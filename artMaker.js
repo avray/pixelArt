@@ -8,6 +8,7 @@ window.onload = function() {
     let colorChoices = ['red', 'orange', 'yellow', 'green', 'cyan'];
     for(let color of colorChoices) {
         let box = document.createElement('span');
+        box.className = 'colorpickfixed';
         box.style.border = '1px solid black';
         box.style.backgroundColor = color;
         cpicker.appendChild(box);
@@ -15,6 +16,7 @@ window.onload = function() {
 
     let box = document.createElement('input');
     box.id = 'picker';
+    box.className = 'colorpickvariable';
     box.type = 'color';
     box.value = '#e66466';
     box.style.border = '1px solid black';
@@ -26,18 +28,21 @@ window.onload = function() {
         let box = document.createElement('span');
         box.style.border = '1px solid black';
         box.style.backgroundColor = 'blue';
+        box.className = 'canvas';
         canvas.appendChild(box);
     }
 
     const spans = document.querySelectorAll('span')
     spans.forEach(function(span){
-        // span.onclick = changeColor;
-        span.addEventListener("mousedown",startcolor);
-        span.addEventListener("mousemove",continuecolor);
-        span.addEventListener("mouseup",stopcolor);
+        if(span.className == 'canvas'){
+                span.addEventListener("mousedown",startcolor);
+                span.addEventListener("mousemove",continuecolor);
+                span.addEventListener("mouseup",stopcolor);
+            }
+        else span.onclick = selectcolor;    
     })
 
-    this.document.getElementById('picker').addEventListener("change",changeColor)
+    this.document.getElementById('picker').addEventListener("change",selectcolor)
 
     function changeColor(event) {
         // console.log("onclick triggered")
@@ -47,12 +52,19 @@ window.onload = function() {
             (event.target.style.backgroundColor != selectedColor)) {
             event.target.style.backgroundColor = selectedColor;    
         }
-        else if (event.target.id == "picker") {
-            selectedColor = event.target.value;
+    }
+
+    function selectcolor(event) {
+        color = false;
+        console.log("inside selectcolor");
+        console.log(event);
+        if (event.target.className == "colorpickfixed") {
+            selectedColor = event.target.style.backgroundColor;
             console.log("selectedColor " + selectedColor)
         }
-        else if (event.path[1].id == "colorpicker") {
-            selectedColor = event.target.style.backgroundColor;
+        else if (event.target.id == 'picker') {
+            selectedColor = event.target.value;
+            console.log("selectedColor " + selectedColor)
         }
     }
 
